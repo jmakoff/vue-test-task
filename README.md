@@ -8,7 +8,7 @@ When you'll start the app you'll skeleton of the app with tasks in it.
 **Complete as many tasks as you can**
 
 Here's a sample video of a UX: 
-![todo app](https://dl.dropboxusercontent.com/u/16381171/todo-vue-task.gif)
+![todo app](docs/vue-todo.gif)
 
 The closer it will look to this video, the better.
 
