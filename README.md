@@ -5,7 +5,7 @@ In order to show your skills and how fast you can learn you'll need to create a 
 
 When you'll start the app you'll skeleton of the app with tasks in it.
 
-**Complete as many tasks as you can**
+**Complete as many tasks as you can** however you don't have to do all of them.
 
 Here's a sample video of a UX: 
 ![todo app](docs/vue-todo.gif)
@@ -26,7 +26,7 @@ The closer it will look to this video, the better.
 ## Where to start?
 Before you start coding you should understand main concept of `vue.js` especially its _reactivity_.
 
-If you're not familiar with vue.js 2.0 start by reading this [guide](https://vuejs.org/v2/guide/).
+If you're not familiar with vue.js 2.0 **start by reading this [guide](https://vuejs.org/v2/guide/)**.
 
 More detailed documentation can be found in [API](https://vuejs.org/v2/api/) section.
  
@@ -77,6 +77,8 @@ And finally to to start dev server run this in a directory with the app:
 npm run dev
 ```
 
+Main file for you to work with will be `src/components/todo.vue`.
+
 In most cases when you'll change source code browser with refresh automatically, but sometimes in order to see changes you'll need to refresh it manually or even restart dev server. 
 
 **IMPORTANT!** if you don't see the app running after completing all steps above up environment contact us so we can help you.
@@ -120,3 +122,15 @@ In case of macOS it can be installed via homebrew
 Make sure that dev server is still running.
  
 Sometimes you'll need to refresh browser manually or even restart dev server to see your changes.
+
+### I've started dev server but it said that npm version is wrong, after updating npm it say about missing packages.
+If may happen when you started installing the app with older version of `npm`, then upgraded `npm` and trying to run or reinstall packages. 
+
+To deal with this first delte `node_modules` directory:
+``` bash
+rm -rf node_modules
+```
+then install packages once again
+``` bash
+npm install
+```
