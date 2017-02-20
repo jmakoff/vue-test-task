@@ -126,7 +126,7 @@ Sometimes you'll need to refresh browser manually or even restart dev server to 
 ### I've started dev server but it said that npm version is wrong, after updating npm it say about missing packages.
 If may happen when you started installing the app with older version of `npm`, then upgraded `npm` and trying to run or reinstall packages. 
 
-To deal with this first delte `node_modules` directory:
+To deal with this first delete `node_modules` directory:
 ``` bash
 rm -rf node_modules
 ```
