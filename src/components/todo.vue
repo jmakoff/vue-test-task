@@ -42,6 +42,7 @@
         methods : {
             addTask () {
                 this.tasks.push({name : this.newTaskName, complete : false});
+                this.newTaskName = "";
             }
         }
     };
@@ -62,6 +63,9 @@
         .tasks {
             list-style: none;
             padding: 0;
+        }
+        .complete{
+            text-decoration: line-through;
         }
     }
 </style>
