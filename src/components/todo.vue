@@ -9,8 +9,8 @@
                 </label>
             </li>
         </ul>
-        <div>
-            <ui-textbox placeholder="e.g. 'read vue.js guide'" v-model="newTaskName"></ui-textbox>
+        <div class="input_row">
+            <ui-textbox class= 'width_input' placeholder="e.g. 'read vue.js guide'" v-model="newTaskName"></ui-textbox>
             <ui-button color="primary" @click="addTask" icon="add">Add</ui-button>
         </div>
     </div>
@@ -66,6 +66,13 @@
         }
         .complete{
             text-decoration: line-through;
+        }
+        .input_row{
+            .width_input{
+                width: 80%;
+                display: inline-flex;
+            }
+
         }
     }
 </style>
