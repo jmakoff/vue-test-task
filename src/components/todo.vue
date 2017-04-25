@@ -5,20 +5,26 @@
             <ui-tab class="tabHeight addScroll" title="pending" >
 
 
-                <ul class="tasks">
-                    <list-of-tasks></list-of-tasks>
-                    <!--<li v-for="task in tasks" v-if="task.complete ? false : true" :class="{complete : task.complete}">
-                        <ui-checkbox  v-model="task.complete" :label="task.name"/>
-                    </li>-->
+                <ul class="tasks" >
+                    <!--<list-of-tasks></list-of-tasks>-->
+                    <transition-group  name="list" tag="li">
+                        <li v-for="task in tasks" v-if="task.complete ? false : true" :class="{complete : task.complete}">
+                            <ui-checkbox v-model="task.complete" :label="task.name"/>
+                    </li>
+                    </transition-group>
                 </ul>
 
 
             </ui-tab>
             <ui-tab class="tabHeight addScroll" title="complete" >
                 <ul class="tasks">
+
                     <li v-for="task in tasks" v-if="task.complete ? true : false" :class="{complete : task.complete}">
+                        <transition name="list">
                         <ui-checkbox v-model="task.complete" :label="task.name"/>
+                        </transition>
                     </li>
+
                 </ul>
 
             </ui-tab>
@@ -72,7 +78,24 @@
 </script>
 
 <style scoped lang="scss">
-
+    .list-move{
+        transition: transform 1s;
+    }
+    /*.list-leave-to{
+        opacity: 1;
+    }
+    .list-leave{
+        opacity: 0;
+    }
+    .list-enter-active{
+        transition: all .3s ease
+    }
+    .list-enter{
+        opacity: 0;
+    }
+    .list-enter-to{
+        opacity: 1;
+    }*/
     .todo {
         margin: auto;
         background: #fff;
@@ -81,6 +104,8 @@
         box-shadow: rgba(0, 0, 0, 0.3) 3px 3px 15px;
         width:60%;
         height: 800px;
+
+
 
     .addScroll{
         overflow-y: auto;
