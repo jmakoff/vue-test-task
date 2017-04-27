@@ -2,28 +2,29 @@
     <div class="todo">
         <h1 class="title">Checklist</h1>
         <ui-tabs fullwidth="true" type="text">
-            <ui-tab class="tabHeight addScroll" title="pending" >
+            <ui-tab class="tabHeight addScroll" title="pending">
 
 
-                <ul class="tasks" >
+                <ul class="tasks">
                     <!--<list-of-tasks></list-of-tasks>-->
-                    <transition-group  name="list" tag="li">
-                        <li v-for="task in tasks" v-if="task.complete ? false : true" :class="{complete : task.complete}">
+                    <transition-group name="list" tag="li">
+                        <li v-for="task in tasks" :key="task" v-if="task.complete ? false : true"
+                            :class="{complete : task.complete}">
                             <ui-checkbox v-model="task.complete" :label="task.name"/>
-                    </li>
+                        </li>
                     </transition-group>
                 </ul>
 
 
             </ui-tab>
-            <ui-tab class="tabHeight addScroll" title="complete" >
+            <ui-tab class="tabHeight addScroll" title="complete">
                 <ul class="tasks">
-
-                    <li v-for="task in tasks" v-if="task.complete ? true : false" :class="{complete : task.complete}">
-                        <transition name="list">
-                        <ui-checkbox v-model="task.complete" :label="task.name"/>
-                        </transition>
-                    </li>
+                    <transition-group name="list-complete" tag="li">
+                        <li v-for="task in tasks" v-if="task.complete ? true : false" :key='task'
+                            :class="{complete : task.complete}">
+                            <ui-checkbox v-model="task.complete" :label="task.name" @input="checkboxClicked()"/>
+                        </li>
+                    </transition-group>
 
                 </ul>
 
@@ -32,7 +33,8 @@
         <div class="input_row">
             <ui-textbox class='width_input' placeholder="e.g. 'read vue.js guide'" v-model="newTaskName"
                         @keydown-enter="addTask"></ui-textbox>
-            <ui-button color="primary" @click="addTask" icon="add" :disabled= "(newTaskName=='')? true : false" >Add</ui-button>
+            <ui-button color="primary" @click="addTask" icon="add" :disabled="(newTaskName=='')? true : false">Add
+            </ui-button>
         </div>
     </div>
 </template>
@@ -41,6 +43,7 @@
     export default {
         data () {
             return {
+                LOCAL_STORAGE_KEY: 'OneRich',
                 newTaskName: '',
                 tasks: [
                     {name: 'create skeleton of todo', complete: true},
@@ -64,54 +67,60 @@
         },
 
         methods: {
-            replaceItem(){
-                setTimeout(function () {
-                    return false;
-                }, 1000)
-            },
             addTask () {
                 this.tasks.push({name: this.newTaskName, complete: false});
                 this.newTaskName = "";
+                localStorage.setItem(this.LOCAL_STORAGE_KEY, JSON.stringify(this.tasks));
+                console.log( JSON.parse(localStorage.getItem(this.LOCAL_STORAGE_KEY)));
+            },
+            load() {if (localStorage.getItem(this.LOCAL_STORAGE_KEY)){
+                    this.tasks=JSON.parse(localStorage.getItem(this.LOCAL_STORAGE_KEY));
+                    console.log(localStorage.getItem(this.LOCAL_STORAGE_KEY))
+                }
+            },
+            checkboxClicked(){
+                localStorage.setItem(this.LOCAL_STORAGE_KEY, JSON.stringify(this.tasks));
+                console.log("localstor");
+                console.log(this.tasks);
             }
-        }
+        },
+        beforeMount(){ this.load()}
     };
 </script>
 
 <style scoped lang="scss">
-    .list-move{
-        transition: transform 1s;
+    .list-enter-active, .list-leave-active {
+        transition: all 1s;
     }
-    /*.list-leave-to{
-        opacity: 1;
-    }
-    .list-leave{
+
+    .list-enter, .list-leave-to /* .list-leave-active for <2.1.8 */
+    {
         opacity: 0;
+        transform: translate(20px);
     }
-    .list-enter-active{
-        transition: all .3s ease
+    .list-complete-enter-active, .list-complete-leave-active {
+        transition: all 1s;
     }
-    .list-enter{
+    .list-complete-enter, .list-complete-leave-to {
         opacity: 0;
+        transform: translate(-20px);
     }
-    .list-enter-to{
-        opacity: 1;
-    }*/
+
     .todo {
         margin: auto;
         background: #fff;
         padding: 20px;
         border-radius: 5px;
         box-shadow: rgba(0, 0, 0, 0.3) 3px 3px 15px;
-        width:60%;
+        width: 60%;
         height: 800px;
 
-
-
-    .addScroll{
+    .addScroll {
         overflow-y: auto;
     }
-    .tabHeight{
-        height:500px ;
+
+    .tabHeight {
+        height: 500px;
     }
 
     .title {
