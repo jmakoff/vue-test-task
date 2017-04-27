@@ -1,4 +1,4 @@
-// Vue.component("list-of-tasks", {
+// Vue.component("list-of-tasks", {/*Sorry, I failed creating vue.js component */
 //
 //     template: `<li v-for="task in tasks" v-if="task.complete ? false : true" :class="{complete : task.complete}">
 //     <ui-checkbox  v-model="task.complete" :label="task.name"/>
